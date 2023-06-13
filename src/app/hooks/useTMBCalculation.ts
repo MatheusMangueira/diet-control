@@ -27,7 +27,7 @@ const useTMBCalculation = (): TMBCalculator => {
 
     const getObjectiveValue = (objective: string): number => {
       const objectiveValues: { [key: string]: number } = {
-        Emagrecer: 500,
+        Emagrecer: -500,
         "Manter peso": 0,
         "Ganho de peso": 500,
       };
@@ -38,13 +38,14 @@ const useTMBCalculation = (): TMBCalculator => {
     const calculateTMBForMale = (): number => {
       const tmb =
         getActivityMultiplier(data.activity) *
-          (66 +
-            13.7 * Number(data.Weight) +
-            5 * Number(data.height) -
-            6.8 * Number(data.age)) -
-        getObjectiveValue(data.objective);
+        (66 +
+          13.7 * Number(data.Weight) +
+          5 * Number(data.height) -
+          6.8 * Number(data.age));
 
-      return tmb;
+      const result = tmb + getObjectiveValue(data.objective);
+
+      return result;
     };
 
     const calculateTMBForFemale = (): number => {
@@ -55,7 +56,9 @@ const useTMBCalculation = (): TMBCalculator => {
           1.8 * Number(data.height) -
           4.7 * Number(data.age));
 
-      return tmb;
+      const result = tmb + getObjectiveValue(data.objective);
+
+      return result;
     };
 
     const tmb =
