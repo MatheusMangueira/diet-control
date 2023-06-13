@@ -1,11 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../Button";
 import { InputSelect, Input } from "../Inputs";
 import { ResultMacronutrients } from "../ResultMacronutrients";
 import { Title } from "../Title/Title";
 import { useForm, Controller } from "react-hook-form";
 import useTMBCalculation from "@/app/hooks/useTMBCalculation";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import useMacronutrients from "@/app/hooks/useMacronutrients";
 
 export interface IFormInputs {
   name: string;
@@ -18,8 +21,25 @@ export interface IFormInputs {
   meals: string;
 }
 
+const schema = yup.object().shape({
+  name: yup.string().required("Nome é obrigatório").min(3),
+  objective: yup.string().required("Objetivo é obrigatório"),
+  sex: yup.string().required("Sexo é obrigatório"),
+  height: yup.string().required("Altura é obrigatório"),
+  Weight: yup.string().required("Peso é obrigatório"),
+  age: yup.string().required("Idade é obrigatório"),
+  activity: yup.string().required("Nivel de atividade é obrigatório"),
+  meals: yup.string().required("Refeições no dia é obrigatório"),
+});
+
 export const PersonInformation = () => {
-  const { control, handleSubmit } = useForm<IFormInputs>({
+  const {
+    control,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInputs>({
+    resolver: yupResolver(schema),
     defaultValues: {
       objective: "Emagrecer",
       sex: "Masculino",
@@ -35,6 +55,16 @@ export const PersonInformation = () => {
   const [objectPerson, setobjectPerson] = useState<string>("");
 
   const { result, calculateTMB } = useTMBCalculation();
+
+  const { calculateMacronutrients, resultMacros } = useMacronutrients();
+
+  useEffect(() => {
+    if (result) {
+      calculateMacronutrients({
+        totalCalories: result,
+      });
+    }
+  }, [result]);
 
   const handleSubmitForm = (data: IFormInputs) => {
     setobjectPerson(data.objective);
@@ -52,6 +82,7 @@ export const PersonInformation = () => {
           control={control}
           render={({ field: { onChange, value } }) => (
             <Input
+              errors={!!errors.name?.message}
               label="Nome"
               onChange={onChange}
               value={value}
@@ -64,6 +95,7 @@ export const PersonInformation = () => {
           control={control}
           render={({ field: { onChange, value } }) => (
             <InputSelect
+              errors={!!errors.objective?.message}
               value={value}
               onChange={onChange}
               placeholder="Objetivo"
@@ -78,7 +110,12 @@ export const PersonInformation = () => {
           name="sex"
           control={control}
           render={({ field: { onChange, value } }) => (
-            <InputSelect onChange={onChange} value={value} placeholder="Sexo">
+            <InputSelect
+              errors={!!errors.sex?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Sexo"
+            >
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
             </InputSelect>
@@ -91,6 +128,7 @@ export const PersonInformation = () => {
             control={control}
             render={({ field: { onChange, value } }) => (
               <Input
+                errors={!!errors.height?.message}
                 label="Altura(cm)"
                 InputType="number"
                 pattern="[0-9]*"
@@ -106,6 +144,7 @@ export const PersonInformation = () => {
             control={control}
             render={({ field: { onChange, value } }) => (
               <Input
+                errors={!!errors.Weight?.message}
                 label="Peso(kg)"
                 InputType="number"
                 min="0"
@@ -120,6 +159,7 @@ export const PersonInformation = () => {
             control={control}
             render={({ field: { onChange, value } }) => (
               <Input
+                errors={!!errors.age?.message}
                 label="Idade(anos)"
                 InputType="number"
                 onChange={onChange}
@@ -135,6 +175,7 @@ export const PersonInformation = () => {
           control={control}
           render={({ field: { onChange, value } }) => (
             <InputSelect
+              errors={!!errors.activity?.message}
               onChange={onChange}
               value={value}
               placeholder="Nivel de atividade"
@@ -153,6 +194,7 @@ export const PersonInformation = () => {
           control={control}
           render={({ field: { onChange, value } }) => (
             <InputSelect
+              errors={!!errors.meals?.message}
               onChange={onChange}
               value={value}
               placeholder="Refeições no dia"
@@ -166,11 +208,24 @@ export const PersonInformation = () => {
         />
       </div>
       <div className="my-5">
-        <Button onClick={handleSubmit(handleSubmitForm)} title="Calcular" />
+        <Button
+          disabled={
+            !!errors.name?.message ||
+            !!errors.height?.message ||
+            !!errors.Weight?.message ||
+            !!errors.age?.message
+          }
+          onClick={handleSubmit(handleSubmitForm)}
+          title="Calcular"
+        />
       </div>
       {result && (
         <div className="">
-          <ResultMacronutrients data={result} object={objectPerson} />
+          <ResultMacronutrients
+            totalKcal={result}
+            resultMacro={resultMacros}
+            object={objectPerson}
+          />
         </div>
       )}
     </div>
