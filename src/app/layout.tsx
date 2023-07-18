@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className=" h-[100vh] w-full flex bg-gray-50 ">
+        <div className=" h-[100vh] w-full flex bg-gray-100 ">
           <Menu />
           <div className="px-2 pt-6 w-full">{children}</div>
         </div>
