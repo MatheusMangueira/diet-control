@@ -1,32 +1,27 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { Button } from "../Button";
 import { Input } from "../Inputs";
 import { Title } from "../Title";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import useMacronutrients from "@/app/hooks/useMacronutrients";
-import { useEffect } from "react";
-import { Button } from "../Button";
 
 type IFormInputs = {
-  protein: string;
-  carb: string;
-  fat: string;
+  protein: number;
+  carb: number;
+  fat: number;
 };
 
 type IResultNutrientsProps = {
   object: string;
-  resultMacro: {
-    proteinGrams: number;
-    carbGrams: number;
-    fatGrams: number;
-  };
+  resultMacro: IFormInputs;
   totalKcal: string;
 };
 
 const schema = yup.object().shape({
-  protein: yup.string().required("Proteína é obrigatório"),
-  carb: yup.string().required("Carbo é obrigatório"),
-  fat: yup.string().required("Gordura é obrigatório"),
+  protein: yup.number().required("Proteína é obrigatório"),
+  carb: yup.number().required("Carbo é obrigatório"),
+  fat: yup.number().required("Gordura é obrigatório"),
 });
 
 export const ResultMacronutrients = ({
@@ -35,18 +30,19 @@ export const ResultMacronutrients = ({
   totalKcal,
 }: IResultNutrientsProps) => {
   const { control, handleSubmit, setValue } = useForm<IFormInputs>({
+    mode: "onSubmit",
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {
     if (resultMacro) {
-      setValue("protein", resultMacro.proteinGrams.toFixed(2).toString() || "");
-      setValue("carb", resultMacro.carbGrams.toFixed(2).toString() || "");
-      setValue("fat", resultMacro.fatGrams.toFixed(2).toString() || "");
+      setValue("protein", Number(resultMacro.protein.toFixed(2)));
+      setValue("carb", Number(resultMacro.carb.toFixed(2)));
+      setValue("fat", Number(resultMacro.fat.toFixed(2)));
     }
   }, [resultMacro, setValue]);
 
-  const handleSubmitForm = (data: IFormInputs) => {
+  const handleSubmitForm = async (data: IFormInputs) => {
     //fazer a requisição
     console.log(data, "data");
     if (!data.carb || !data.fat || !data.protein)

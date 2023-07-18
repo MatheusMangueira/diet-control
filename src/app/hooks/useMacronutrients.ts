@@ -9,18 +9,18 @@ const useMacronutrients = () => {
 
   const calculateMacronutrients = ({ totalCalories }: IUseMacronutrients) => {
     const proteinCalories = Number(totalCalories) * 0.2;
-    const proteinGrams = proteinCalories / 4;
+    const protein = proteinCalories / 4;
 
     const carbsCalories = Number(totalCalories) * 0.5;
-    const carbGrams = carbsCalories / 4;
+    const carb = carbsCalories / 4;
 
     const fatCalories = Number(totalCalories) * 0.3;
-    const fatGrams = fatCalories / 9;
+    const fat = fatCalories / 9;
 
     setResultMacros({
-      proteinGrams,
-      carbGrams,
-      fatGrams,
+      protein,
+      carb,
+      fat,
     });
   };
 

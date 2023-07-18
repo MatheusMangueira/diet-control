@@ -1,14 +1,14 @@
 "use client";
+import useMacronutrients from "@/app/hooks/useMacronutrients";
+import useTMBCalculation from "@/app/hooks/useTMBCalculation";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
 import { Button } from "../Button";
-import { InputSelect, Input } from "../Inputs";
+import { Input, InputSelect } from "../Inputs";
 import { ResultMacronutrients } from "../ResultMacronutrients";
 import { Title } from "../Title/Title";
-import { useForm, Controller } from "react-hook-form";
-import useTMBCalculation from "@/app/hooks/useTMBCalculation";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import useMacronutrients from "@/app/hooks/useMacronutrients";
 
 export interface IFormInputs {
   name: string;
@@ -53,9 +53,7 @@ export const PersonInformation = () => {
   });
 
   const [objectPerson, setobjectPerson] = useState<string>("");
-
   const { result, calculateTMB } = useTMBCalculation();
-
   const { calculateMacronutrients, resultMacros } = useMacronutrients();
 
   useEffect(() => {
@@ -72,7 +70,7 @@ export const PersonInformation = () => {
   };
 
   return (
-    <div>
+    <div className="p-2">
       <div>
         <Title title={"Informações pessoais"} />
       </div>
@@ -218,7 +216,11 @@ export const PersonInformation = () => {
           onClick={handleSubmit(handleSubmitForm)}
           title="Calcular"
         />
+        calcular o gasto calorico grafico de pizza com os macronutrientes um
+        todoList para colocar a dieta e um grafico para mostrar o progresso do
+        dia e oq falta
       </div>
+
       {result && (
         <div className="">
           <ResultMacronutrients

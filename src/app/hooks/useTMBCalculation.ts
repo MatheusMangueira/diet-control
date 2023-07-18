@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { IFormInputs } from "../components/PersonInformation/PersonInformation";
 
-type TMBResult = string | undefined;
+type TMBResult = string;
 
 type TMBCalculator = {
   calculateTMB: (data: IFormInputs) => void;
@@ -10,7 +10,7 @@ type TMBCalculator = {
 };
 
 const useTMBCalculation = (): TMBCalculator => {
-  const [result, setResult] = useState<TMBResult>(undefined);
+  const [result, setResult] = useState<TMBResult>("");
 
   const calculateTMB = (data: IFormInputs) => {
     const getActivityMultiplier = (activity: string): number => {
