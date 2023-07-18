@@ -70,7 +70,7 @@ export const PersonInformation = () => {
   };
 
   return (
-    <div className="p-2">
+    <div>
       <div>
         <Title title={"Informações pessoais"} />
       </div>
