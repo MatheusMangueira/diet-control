@@ -1,4 +1,4 @@
-import { Pie, Remaining } from "./components/Charts";
+import { Pie, Remaining, Water } from "./components/Charts";
 import { Carrossel } from "./components/carrossel";
 import { Header } from "./components/header/Header";
 
@@ -13,6 +13,7 @@ export default function Director() {
         <div className="flex w-full gap-4">
           <Pie />
           <Remaining />
+          <Water />
         </div>
       </div>
     </main>

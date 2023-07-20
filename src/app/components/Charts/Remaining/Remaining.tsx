@@ -24,7 +24,7 @@ const remainingMacros = [
 
 export const Remaining = () => {
   return (
-    <div className="bg-white rounded-2xl flex flex-col gap-4 p-4">
+    <div className="bg-white rounded-2xl flex flex-col gap-4 p-4 w-full">
       <h2 className="text-zinc-900 text-base font-medium">Remaining macros</h2>
 
       {remainingMacros.map((item) => (

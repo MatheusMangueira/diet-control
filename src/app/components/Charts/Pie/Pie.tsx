@@ -10,7 +10,7 @@ const pieSeries = [44, 55, 13];
 
 export const Pie = () => {
   return (
-    <div className="bg-white rounded-2xl flex flex-col gap-4 p-4">
+    <div className="bg-white rounded-2xl flex flex-col gap-4 p-4 w-full">
       <h2 className="text-zinc-900 text-base font-medium">
         Macronutrientes do dia:
       </h2>
