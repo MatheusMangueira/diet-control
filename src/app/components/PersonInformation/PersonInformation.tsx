@@ -52,7 +52,16 @@ export const PersonInformation = () => {
     },
   });
 
-  const [objectPerson, setobjectPerson] = useState<string>("");
+  const [formData, setoformData] = useState<IFormInputs>({
+    objective: "",
+    name: "",
+    activity: "",
+    age: "",
+    height: "",
+    meals: "",
+    sex: "",
+    Weight: "",
+  });
   const { result, calculateTMB } = useTMBCalculation();
   const { calculateMacronutrients, resultMacros } = useMacronutrients();
 
@@ -65,7 +74,7 @@ export const PersonInformation = () => {
   }, [result]);
 
   const handleSubmitForm = (data: IFormInputs) => {
-    setobjectPerson(data.objective);
+    setoformData(data);
     calculateTMB(data);
   };
 
@@ -216,9 +225,6 @@ export const PersonInformation = () => {
           onClick={handleSubmit(handleSubmitForm)}
           title="Calcular"
         />
-        calcular o gasto calorico grafico de pizza com os macronutrientes um
-        todoList para colocar a dieta e um grafico para mostrar o progresso do
-        dia e oq falta
       </div>
 
       {result && (
@@ -226,7 +232,7 @@ export const PersonInformation = () => {
           <ResultMacronutrients
             totalKcal={result}
             resultMacro={resultMacros}
-            object={objectPerson}
+            object={formData}
           />
         </div>
       )}

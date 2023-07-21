@@ -1,10 +1,13 @@
+"use client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Button } from "../Button";
 import { Input } from "../Inputs";
 import { Title } from "../Title";
+import useLocalStorage from "@/app/hooks/useLocalStorage";
+import { useRouter } from "next/navigation";
 
 type IFormInputs = {
   protein: number;
@@ -13,7 +16,10 @@ type IFormInputs = {
 };
 
 type IResultNutrientsProps = {
-  object: string;
+  object: {
+    name: string;
+    objective: string;
+  };
   resultMacro: IFormInputs;
   totalKcal: string;
 };
@@ -34,6 +40,14 @@ export const ResultMacronutrients = ({
     resolver: yupResolver(schema),
   });
 
+  const navigate = useRouter();
+
+  const getLocalStorageMacros = useLocalStorage("macros", {}).getLocalStorage();
+
+  const [macros, setMacros] = useState(() => {
+    return getLocalStorageMacros;
+  });
+
   useEffect(() => {
     if (resultMacro) {
       setValue("protein", Number(resultMacro.protein.toFixed(2)));
@@ -42,12 +56,19 @@ export const ResultMacronutrients = ({
     }
   }, [resultMacro, setValue]);
 
-  const handleSubmitForm = async (data: IFormInputs) => {
-    //fazer a requisição
-    console.log(data, "data");
-    if (!data.carb || !data.fat || !data.protein)
+  const handleSubmitForm = async (macros: IFormInputs) => {
+    if (!macros.carb || !macros.fat || !macros.protein)
       return console.log("preencha todos os campos");
+
+    try {
+      setMacros({ macros, object });
+      navigate.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useLocalStorage("macros", macros).setLocalStorage(macros);
 
   return (
     <form>
@@ -57,7 +78,7 @@ export const ResultMacronutrients = ({
       <div className="mb-4 text-md ">
         {object ? (
           <p>
-            Seu total de Kcal para {object} é:{" "}
+            Seu total de Kcal para {object.objective} é:{" "}
             <span className="text-green-600">{totalKcal}</span>
           </p>
         ) : (
