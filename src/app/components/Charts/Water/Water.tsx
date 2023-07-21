@@ -1,6 +1,5 @@
 "use client";
 import useLocalStorage from "@/app/hooks/useLocalStorage";
-import { useState } from "react";
 
 const img = {
   water:
@@ -8,12 +7,7 @@ const img = {
 };
 
 export const Water = () => {
-  // const getLocalStorageWater = useLocalStorage("water", 0).getLocalStorage();
   const [storedValue, setStoredValue] = useLocalStorage("water", 0);
-
-  // const [waterCount, setWaterCount] = useState(() => {
-  //   return getLocalStorageWater;
-  // });
 
   const handleCountWater = () => {
     setStoredValue((prevWaterCount: number) => prevWaterCount + 1);
@@ -22,8 +16,6 @@ export const Water = () => {
   const handleClearWater = () => {
     setStoredValue(0);
   };
-
-  // useLocalStorage("water", waterCount).setLocalStorage(waterCount);
 
   return (
     <div
@@ -37,9 +29,7 @@ export const Water = () => {
           border-4 border-[#8cdd8c]
          items-center"
         >
-          <p className="text-lg font-medium">
-            {storedValue ? storedValue : "0"}
-          </p>
+          <p className="text-lg font-medium">{storedValue}</p>
         </div>
       </div>
       <div className="flex flex-col gap-2">
