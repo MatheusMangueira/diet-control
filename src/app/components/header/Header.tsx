@@ -12,7 +12,7 @@ export const Header = ({ subtitle }: PropsHeader) => {
     <div className="pb-6">
       <div>
         <h1 className="text-4xl font-medium text-gray-950">
-          Hello {getName.object?.name},🍃
+          Olá {getName.object?.name},🍃
         </h1>
       </div>
       <div>

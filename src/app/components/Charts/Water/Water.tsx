@@ -29,7 +29,7 @@ export const Water = () => {
       style={{ backgroundImage: `url(${img.water})` }}
       className="bg-white rounded-2xl flex flex-col gap-4 p-4 bg-cover w-full h-[300px] transition-all ease-in-out duration-500"
     >
-      <h2 className="text-white text-base font-medium">Drink Cups Water</h2>
+      <h2 className="text-white text-base font-medium">Beber copo de Água</h2>
       <div className="flex h-full w-full justify-center items-center">
         <div
           className="bg-white rounded-full w-24 h-24 flex justify-center
@@ -44,13 +44,13 @@ export const Water = () => {
           onClick={handleCountWater}
           className="w-full h-7 p-2 flex justify-center items-center bg-[#8cdd8c] rounded-lg hover:bg-[#b4e9b4] transition-all ease-in-out duration-500"
         >
-          <p className="text-zinc-900 text-sm font-medium">Drink</p>
+          <p className="text-zinc-900 text-sm font-medium">Bebido</p>
         </button>
         <button
           onClick={handleClearWater}
           className="w-full h-7 p-2 flex justify-center items-center bg-slate-50 rounded-lg hover:bg-[#c6ebc6] transition-all ease-in-out duration-500"
         >
-          <p className="text-zinc-900 text-sm font-medium">Clear</p>
+          <p className="text-zinc-900 text-sm font-medium">Limpar</p>
         </button>
       </div>
     </div>
