@@ -4,7 +4,8 @@ import Link from "next/link";
 import ReactApexChart from "react-apexcharts";
 
 export const Pie = () => {
-  const getMacros = useLocalStorage("macros", {}).getLocalStorage();
+  // const getMacros = useLocalStorage("macros", {}).getLocalStorage();
+  const [storedValue] = useLocalStorage("macros", {});
 
   const pieOptions = {
     colors: ["#e45858", "#51c751", "#f7f313"],
@@ -12,9 +13,9 @@ export const Pie = () => {
   };
 
   const pieSeries = [
-    getMacros.macros?.protein || 0,
-    getMacros.macros?.carb || 0,
-    getMacros.macros?.fat || 0,
+    storedValue.macros?.protein || 0,
+    storedValue.macros?.carb || 0,
+    storedValue.macros?.fat || 0,
   ];
 
   return (

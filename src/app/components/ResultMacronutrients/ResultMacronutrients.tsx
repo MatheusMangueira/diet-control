@@ -42,11 +42,13 @@ export const ResultMacronutrients = ({
 
   const navigate = useRouter();
 
-  const getLocalStorageMacros = useLocalStorage("macros", {}).getLocalStorage();
+  // const getLocalStorageMacros = useLocalStorage("macros", {}).getLocalStorage();
 
-  const [macros, setMacros] = useState(() => {
-    return getLocalStorageMacros;
-  });
+  const [storedValue, setStoredValue] = useLocalStorage("macros", {});
+
+  // const [macros, setMacros] = useState(() => {
+  //   return getLocalStorageMacros;
+  // });
 
   useEffect(() => {
     if (resultMacro) {
@@ -61,14 +63,14 @@ export const ResultMacronutrients = ({
       return console.log("preencha todos os campos");
 
     try {
-      setMacros({ macros, object });
+      setStoredValue({ macros, object });
       navigate.push("/");
     } catch (error) {
       console.log(error);
     }
   };
 
-  useLocalStorage("macros", macros).setLocalStorage(macros);
+  // useLocalStorage("macros", macros).setLocalStorage(macros);
 
   return (
     <form>

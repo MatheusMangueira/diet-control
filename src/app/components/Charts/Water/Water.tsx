@@ -8,21 +8,22 @@ const img = {
 };
 
 export const Water = () => {
-  const getLocalStorageWater = useLocalStorage("water", 0).getLocalStorage();
+  // const getLocalStorageWater = useLocalStorage("water", 0).getLocalStorage();
+  const [storedValue, setStoredValue] = useLocalStorage("water", 0);
 
-  const [waterCount, setWaterCount] = useState(() => {
-    return getLocalStorageWater;
-  });
+  // const [waterCount, setWaterCount] = useState(() => {
+  //   return getLocalStorageWater;
+  // });
 
   const handleCountWater = () => {
-    setWaterCount((prevWaterCount: number) => prevWaterCount + 1);
+    setStoredValue((prevWaterCount: number) => prevWaterCount + 1);
   };
 
   const handleClearWater = () => {
-    setWaterCount(0);
+    setStoredValue(0);
   };
 
-  useLocalStorage("water", waterCount).setLocalStorage(waterCount);
+  // useLocalStorage("water", waterCount).setLocalStorage(waterCount);
 
   return (
     <div
@@ -36,7 +37,7 @@ export const Water = () => {
           border-4 border-[#8cdd8c]
          items-center"
         >
-          <p className="text-lg font-medium">{waterCount}</p>
+          <p className="text-lg font-medium">{storedValue}</p>
         </div>
       </div>
       <div className="flex flex-col gap-2">

@@ -6,13 +6,15 @@ type PropsHeader = {
 };
 
 export const Header = ({ subtitle }: PropsHeader) => {
-  const getName = useLocalStorage("macros", {}).getLocalStorage();
+  const [storedValue] = useLocalStorage("macros", {});
+
+  console.log(storedValue);
 
   return (
     <div className="pb-6">
       <div>
         <h1 className="text-4xl font-medium text-gray-950">
-          Olá {getName.object?.name},🍃
+          Olá {storedValue.object?.name},🍃
         </h1>
       </div>
       <div>
