@@ -1,11 +1,12 @@
 import { Pie, Remaining, Water } from "./components/Charts";
 import { Carrossel } from "./components/carrossel";
 import { Header } from "./components/header/Header";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 export default function Director() {
   return (
     <main className="w-full p-2">
-      <Header name="Matheus" subtitle="Bem vindo ao seu diretor de dieta!" />
+      <Header name={""} subtitle="Bem vindo ao seu diretor de dieta!" />
       <div className="w-full flex flex-col gap-8 ">
         <div className="w-full">
           <Carrossel />

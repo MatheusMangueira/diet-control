@@ -1,19 +1,20 @@
 "use client";
 import useLocalStorage from "@/app/hooks/useLocalStorage";
+import Link from "next/link";
 import ReactApexChart from "react-apexcharts";
 
 export const Pie = () => {
   const getMacros = useLocalStorage("macros", {}).getLocalStorage();
 
   const pieOptions = {
-    colors: ["#FF0000", "#00FF00", "#0000FF"],
+    colors: ["#e45858", "#51c751", "#f7f313"],
     labels: ["Proteina", "Carboidrato", "Gordura"],
   };
 
   const pieSeries = [
-    getMacros.macros.protein,
-    getMacros.macros.carb,
-    getMacros.macros.fat,
+    getMacros.macros?.protein || 0,
+    getMacros.macros?.carb || 0,
+    getMacros.macros?.fat || 0,
   ];
 
   return (
@@ -21,6 +22,7 @@ export const Pie = () => {
       <h2 className="text-zinc-900 text-base font-medium">
         Macronutrientes do dia:
       </h2>
+
       <ReactApexChart
         options={pieOptions}
         series={pieSeries}

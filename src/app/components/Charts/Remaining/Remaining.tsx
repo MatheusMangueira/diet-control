@@ -8,23 +8,23 @@ export const Remaining = () => {
     {
       id: 1,
       name: "Carbo",
-      value: getMacros.macros.carb,
+      value: getMacros.macros?.carb || 0,
       percent: 25,
-      color: "bg-blue-500",
+      color: "bg-[#51c751]",
     },
     {
       id: 2,
       name: "Proteina",
-      value: getMacros.macros.protein,
+      value: getMacros.macros?.protein || 0,
       percent: 25,
-      color: "bg-green-500",
+      color: "bg-[#e45858]",
     },
     {
       id: 3,
       name: "Gordura",
-      value: getMacros.macros.fat,
+      value: getMacros.macros?.fat || 0,
       percent: 25,
-      color: "bg-yellow-500",
+      color: "bg-[#f7f313]",
     },
   ];
 
