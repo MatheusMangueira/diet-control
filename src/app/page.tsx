@@ -1,7 +1,6 @@
 import { Pie, Remaining, Water } from "./components/Charts";
 import { Carrossel } from "./components/carrossel";
 import { Header } from "./components/header/Header";
-import useLocalStorage from "./hooks/useLocalStorage";
 
 export default function Director() {
   return (

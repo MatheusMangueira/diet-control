@@ -37,7 +37,9 @@ export const Water = () => {
           border-4 border-[#8cdd8c]
          items-center"
         >
-          <p className="text-lg font-medium">{storedValue}</p>
+          <p className="text-lg font-medium">
+            {storedValue ? storedValue : "0"}
+          </p>
         </div>
       </div>
       <div className="flex flex-col gap-2">

@@ -17,7 +17,7 @@ const useLocalStorage = (key: string, initialValue: any) => {
          const serializedValue = JSON.stringify(storedValue);
          localStorage.setItem(key, serializedValue);
       } catch (error) {
-         console.error(`Error while setting '${key}' to localStorage: ${error}`);
+         console.error(`Error `);
       }
    }, [key, storedValue]);
 

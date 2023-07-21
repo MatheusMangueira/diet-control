@@ -1,10 +1,9 @@
 "use client";
 import useLocalStorage from "@/app/hooks/useLocalStorage";
-import Link from "next/link";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export const Pie = () => {
-  // const getMacros = useLocalStorage("macros", {}).getLocalStorage();
   const [storedValue] = useLocalStorage("macros", {});
 
   const pieOptions = {
@@ -24,12 +23,7 @@ export const Pie = () => {
         Macronutrientes do dia:
       </h2>
 
-      <ReactApexChart
-        options={pieOptions}
-        series={pieSeries}
-        type="donut"
-        width={380}
-      />
+      <Chart options={pieOptions} series={pieSeries} type="donut" width={380} />
     </div>
   );
 };
