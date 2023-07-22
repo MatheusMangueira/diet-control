@@ -18,7 +18,7 @@ export interface IFormInputs {
   Weight: string;
   age: string;
   activity: string;
-  meals: string;
+  meals: number;
 }
 
 const schema = yup.object().shape({
@@ -29,7 +29,7 @@ const schema = yup.object().shape({
   Weight: yup.string().required("Peso é obrigatório"),
   age: yup.string().required("Idade é obrigatório"),
   activity: yup.string().required("Nivel de atividade é obrigatório"),
-  meals: yup.string().required("Refeições no dia é obrigatório"),
+  meals: yup.number().required("Refeições no dia é obrigatório"),
 });
 
 export const PersonInformation = () => {
@@ -44,7 +44,7 @@ export const PersonInformation = () => {
       objective: "Emagrecer",
       sex: "Masculino",
       activity: "Sedentário",
-      meals: "3 refeições no dia",
+      meals: 3,
       height: "",
       Weight: "",
       age: "",
@@ -58,7 +58,7 @@ export const PersonInformation = () => {
     activity: "",
     age: "",
     height: "",
-    meals: "",
+    meals: 0,
     sex: "",
     Weight: "",
   });
@@ -206,10 +206,10 @@ export const PersonInformation = () => {
               value={value}
               placeholder="Refeições no dia"
             >
-              <option value="3 reifeições no dia">3 reifeições no dia</option>
-              <option value="4 reifeições no dia">4 reifeições no dia</option>
-              <option value="5 reifeições no dia">5 reifeições no dia</option>
-              <option value="6 reifeições no dia">6 reifeições no dia</option>
+              <option value={3}>3 reifeições no dia</option>
+              <option value={4}>4 reifeições no dia</option>
+              <option value={5}>5 reifeições no dia</option>
+              <option value={6}>6 reifeições no dia</option>
             </InputSelect>
           )}
         />

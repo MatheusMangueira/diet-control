@@ -1,6 +1,6 @@
 type IInputTextProps = {
   InputType?: string;
-  label: string;
+  label?: string;
   errors?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 type IInputSelectProps = {
