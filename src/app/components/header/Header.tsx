@@ -6,13 +6,17 @@ type PropsHeader = {
 };
 
 export const Header = ({ subtitle }: PropsHeader) => {
-  const [storedValue] = useLocalStorage("macros", {});
+  const [storedValue] = useLocalStorage("name", {
+    object: {
+      name: "",
+    },
+  });
 
   return (
     <div className="pb-6">
       <div>
         <h1 className="text-4xl font-medium text-gray-950">
-          Olá {storedValue ? storedValue.object?.name : "seu nome"},🍃
+          Olá {storedValue.object.name === "" ? " " : `${storedValue.object.name},🍃`}
         </h1>
       </div>
       <div>

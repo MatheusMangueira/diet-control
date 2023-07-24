@@ -2,29 +2,34 @@
 import useLocalStorage from "@/app/hooks/useLocalStorage";
 
 export const Remaining = () => {
-  // const getMacros = useLocalStorage("macros", {}).getLocalStorage();
-  const [storedValue] = useLocalStorage("macros", {});
+  const [storedValue] = useLocalStorage("macros", {
+    macros: {
+      protein: 0,
+      carb: 0,
+      fat: 0,
+    }
+  });
 
 
   const remainingMacros = [
     {
       id: 1,
       name: "Carbo",
-      value: storedValue.macros?.carb || 0,
+      value: storedValue.macros?.carb,
       percent: 25,
       color: "bg-[#51c751]",
     },
     {
       id: 2,
       name: "Proteina",
-      value: storedValue.macros?.protein || 0,
+      value: storedValue.macros?.protein,
       percent: 25,
       color: "bg-[#e45858]",
     },
     {
       id: 3,
       name: "Gordura",
-      value: storedValue.macros?.fat || 0,
+      value: storedValue.macros?.fat,
       percent: 25,
       color: "bg-[#f7f313]",
     },

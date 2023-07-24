@@ -7,10 +7,12 @@ const img = {
 };
 
 export const Water = () => {
-  const [storedValue, setStoredValue] = useLocalStorage("water", 0);
+  const [storedValue, setStoredValue] = useLocalStorage("water",
+    0
+  );
 
   const handleCountWater = () => {
-    setStoredValue((prevWaterCount: number) => prevWaterCount + 1);
+    setStoredValue(storedValue + 1);
   };
 
   const handleClearWater = () => {

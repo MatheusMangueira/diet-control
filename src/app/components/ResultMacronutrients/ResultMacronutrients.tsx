@@ -18,6 +18,7 @@ type IFormInputs = {
 type IResultNutrientsProps = {
   object: {
     name: string;
+    meals: number;
     objective: string;
   };
   resultMacro: IFormInputs;
@@ -44,11 +45,30 @@ export const ResultMacronutrients = ({
 
   // const getLocalStorageMacros = useLocalStorage("macros", {}).getLocalStorage();
 
-  const [storedValue, setStoredValue] = useLocalStorage("macros", {});
+  const [storedValue, setStoredValue] = useLocalStorage("macros", {
+    macros: {
+      protein: 0,
+      carb: 0,
+      fat: 0,
+    },
+    object: {
+      name: "",
+      objective: "",
+    },
+  });
 
-  // const [macros, setMacros] = useState(() => {
-  //   return getLocalStorageMacros;
-  // });
+  const [todos, setTodos] = useLocalStorage("todos", {
+    object: {
+      meals: 0,
+
+    }
+  })
+
+  const [name, setName] = useLocalStorage("name", {
+    object: {
+      name: "",
+    },
+  });
 
   useEffect(() => {
     if (resultMacro) {
@@ -64,6 +84,8 @@ export const ResultMacronutrients = ({
 
     try {
       setStoredValue({ macros, object });
+      setTodos({ object: { meals: object.meals } });
+      setName({ object: { name: object.name } });
       navigate.push("/");
     } catch (error) {
       console.log(error);

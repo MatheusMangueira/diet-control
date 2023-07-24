@@ -55,7 +55,6 @@ export const TodoList = ({ item }: Props) => {
     setFoods(newFoods);
   };
 
-  console.log(foods, "foods");
 
   return (
     <div className="h-auto w-[300px] bg-gray-300 rounded-lg p-2 flex flex-col items-center gap-10 overflow-y-scroll">

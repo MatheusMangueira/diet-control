@@ -4,7 +4,13 @@ import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export const Pie = () => {
-  const [storedValue] = useLocalStorage("macros", {});
+  const [storedValue] = useLocalStorage("macros", {
+    macros: {
+      protein: 0,
+      carb: 0,
+      fat: 0,
+    }
+  });
 
   const pieOptions = {
     colors: ["#e45858", "#51c751", "#f7f313"],
@@ -12,9 +18,9 @@ export const Pie = () => {
   };
 
   const pieSeries = [
-    storedValue.macros?.protein || 0,
-    storedValue.macros?.carb || 0,
-    storedValue.macros?.fat || 0,
+    storedValue.macros?.protein,
+    storedValue.macros?.carb,
+    storedValue.macros?.fat,
   ];
 
   return (
