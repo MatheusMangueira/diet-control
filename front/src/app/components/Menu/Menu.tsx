@@ -1,7 +1,7 @@
 "use client";
+
 import Link from "next/link";
 import { Calculator, CheckSquare, HouseLine } from "phosphor-react";
-import { useState } from "react";
 
 const options = [
   {

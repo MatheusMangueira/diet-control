@@ -4,8 +4,8 @@ import { Header } from "./components/header/Header";
 
 export default function Director() {
   return (
-    <main className="w-full p-2">
-      <Header subtitle="Bem vindo ao seu controle de dieta!" />
+    <main className="w-full p-2 ">
+      <Header subtitle="Bem vindo ao seu controle de dieta! " />
       <div className="w-full flex flex-col gap-8 ">
         <div className="w-full">
           <Carrossel />

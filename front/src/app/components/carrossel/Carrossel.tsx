@@ -32,7 +32,7 @@ export const Carrossel = () => {
   return (
     <div
       style={{ backgroundImage: `url(${imagens[currentIndex].src})` }}
-      className={`w-full h-[300px] bg-center bg-cover rounded-2xl transition-all ease-in-out duration-500 `}
+      className={`w-full h-[600px] bg-center bg-cover rounded-2xl transition-all ease-in-out duration-500 `}
     />
   );
 };

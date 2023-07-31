@@ -8,6 +8,7 @@ import { Input } from "../Inputs";
 import { Title } from "../Title";
 import useLocalStorage from "@/app/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
+import { CalculatorMacros } from "@/app/service/calculatorMacros/CalculatorMacros";
 
 type IFormInputs = {
   protein: number;
@@ -60,9 +61,8 @@ export const ResultMacronutrients = ({
   const [todos, setTodos] = useLocalStorage("todos", {
     object: {
       meals: 0,
-
-    }
-  })
+    },
+  });
 
   const [name, setName] = useLocalStorage("name", {
     object: {
@@ -78,11 +78,26 @@ export const ResultMacronutrients = ({
     }
   }, [resultMacro, setValue]);
 
-  const handleSubmitForm = async (macros: IFormInputs) => {
+  const handleSubmitForm = async (macros: IFormInputs, data: any) => {
     if (!macros.carb || !macros.fat || !macros.protein)
       return console.log("preencha todos os campos");
 
+    console.log(data, "macros");
     try {
+      await CalculatorMacros.createMacros({
+        name: "m",
+        object: "Emagrasdecer",
+        sex: "mascuasdlino",
+        height: 16128,
+        age: 123,
+        weight: 6513,
+        activity: "levimente 13ativo",
+        quantityFoods: "3123",
+        protein: 123,
+        fat: 564,
+        carbohydrates: 548,
+      });
+
       setStoredValue({ macros, object });
       setTodos({ object: { meals: object.meals } });
       setName({ object: { name: object.name } });

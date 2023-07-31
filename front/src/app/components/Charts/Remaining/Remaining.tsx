@@ -15,7 +15,7 @@ export const Remaining = () => {
     {
       id: 1,
       name: "Carbo",
-      value: storedValue.macros?.carb,
+      value: storedValue.macros?.carb - 18,
       percent: 25,
       color: "bg-[#51c751]",
     },
